@@ -19,8 +19,6 @@ void makeRotY(float a) {
 
 **重點：**
 - Y 軸保持不變，旋轉發生在 XZ 平面上
-- 使用右手定則：從 Y 軸正方向往下看，逆時針為正旋轉
-- 矩陣索引對應到 4x4 陣列的正確位置
 
 ---
 
@@ -43,8 +41,6 @@ void makeRotX(float a) {
 
 **重點：**
 - X 軸固定，旋轉在 YZ 平面進行
-- 三角函數的正負號必須配合右手座標系
-- 和 2D 旋轉矩陣的概念相同，只是應用在不同平面
 
 ---
 
@@ -64,9 +60,6 @@ Matrix4 localToWorld() {
 
 **重點：**
 - 變換順序：**T × Ry × Rx × Rz × S** (平移 × 旋轉 × 縮放)
-- 矩陣相乘的順序很重要！不能隨便調換
-- 錯誤的順序會導致：縮放影響到平移距離、旋轉軸歪掉等問題
-- 這個順序保證變換都在物件的局部空間進行，最後才移到世界空間
 
 ---
 
@@ -105,11 +98,9 @@ void setPositionOrientation(Vector3 pos, Vector3 lookat) {
 ```
 
 **重點：**
-- Forward 向量：從相機指向目標點（之後取負號符合 OpenGL 慣例）
+- Forward 向量：從相機指向目標點
 - Right 向量：forward 和世界 up 向量做外積
 - Up 向量：right 和 forward 做外積（重新正交化）
-- 視圖矩陣其實就是「相機模型矩陣的反矩陣」
-- 平移部分要用點積再取負號，把世界原點移到相機位置
 
 ---
 
@@ -181,8 +172,6 @@ public float getDepth(float x, float y, Vector3[] vertex) {
 - 計算重心座標 (u, v, w)，代表點到三個頂點的相對距離
 - 三個權重加起來必須等於 1：w = 1 - u - v
 - 用加權平均插值深度：z = w·z₀ + u·z₁ + v·z₂
-- 重心座標讓我們可以在三角形內部平滑插值任何屬性
-- 深度緩衝解決了「誰在前面」的問題，只畫最靠近相機的像素
 
 ---
 
@@ -317,14 +306,10 @@ void debugDraw() {
 
 ## 一些截圖
 
-![深度緩衝渲染](screenshots/depth_buffer.png)
-*用深度緩衝渲染模型 - 越近的地方越亮*
+<img width="995" height="626" alt="image" src="https://github.com/user-attachments/assets/d2b726dd-cf71-41b0-8261-fb75020e5ed0" />
 
-![背面剔除](screenshots/backface_culling.png)
-*只畫正面的三角形，背面的都被剔除了*
+*用Depth Buffer 渲染模型 - 越近的地方越暗*
 
-![相機控制](screenshots/camera_control.png)
-*自由視角相機，可以用 WASD 移動和滑鼠旋轉*
+<img width="1018" height="634" alt="image" src="https://github.com/user-attachments/assets/66e689dc-510b-4c84-a45e-fd55642b195f" />
+*只畫正面的三角形，背面的都被去掉了*
 
-![多個視角](screenshots/viewing_angles.png)
-*從不同角度觀察模型*
