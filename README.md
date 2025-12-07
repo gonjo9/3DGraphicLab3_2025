@@ -308,8 +308,8 @@ void debugDraw() {
 
 <img width="995" height="626" alt="image" src="https://github.com/user-attachments/assets/d2b726dd-cf71-41b0-8261-fb75020e5ed0" />
 
-*用Depth Buffer 渲染模型 - 越近的地方越暗*
+用Depth Buffer 渲染模型 - 越近的地方越暗
 
 <img width="1018" height="634" alt="image" src="https://github.com/user-attachments/assets/66e689dc-510b-4c84-a45e-fd55642b195f" />
-*只畫正面的三角形，背面的都被去掉了*
+只畫正面的三角形，背面的都被去掉了
 
